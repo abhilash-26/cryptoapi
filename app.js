@@ -9,7 +9,9 @@ app.use(express.json());
 
 require("dotenv").config();
 
-// const PORT = process.env.PORT || 8080;
+/*
+ ********* DATABASE CONNECTION *********
+ */
 
 mongoose
   .connect(process.env.db_url, {
@@ -27,9 +29,9 @@ app.use("/api", require("./routes/index"));
 
 const PORT = process.env.PORT || 8090;
 
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("client/build"));
-}
+// if (process.env.NODE_ENV == "production") {
+//   app.use(express.static("client/build"));
+// }
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);

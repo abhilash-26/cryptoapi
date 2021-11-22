@@ -1,4 +1,5 @@
 const Cryptocurrency = require("../models/crypto");
+const { errorResponse } = require("../utils/ResponseHandler");
 
 const createCurrency = async (req, res) => {
   try {
@@ -11,7 +12,7 @@ const createCurrency = async (req, res) => {
     });
     res.send(result);
   } catch (error) {
-    res.send(error);
+    errorResponse(res, error);
   }
 };
 
@@ -32,7 +33,7 @@ const getCurrencyPrice = async (req, res) => {
       });
     }
   } catch (error) {
-    res.send(error);
+    errorResponse(res, error);
   }
 };
 

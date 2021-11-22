@@ -1,6 +1,7 @@
 const userSchema = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { errorResponse, sucessResponse } = require("../utils/ResponseHandler");
 
 const userRegister = async (req, res) => {
   try {
@@ -13,6 +14,7 @@ const userRegister = async (req, res) => {
     }
 
     //hash the password using bcryptjs library
+
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
@@ -28,12 +30,7 @@ const userRegister = async (req, res) => {
       msg: "User registered successfully",
     });
   } catch (error) {
-    res.send({
-      status: 1,
-      msg: error,
-      data: null,
-    });
-    console.log(error);
+    errorResponse(res, error);
   }
 };
 
@@ -50,7 +47,6 @@ const userLogin = async (req, res) => {
 
     // creating the jwt token
     const accesToken = jwt.sign(userTo, process.env.ACCESS_TOCKEN_SECRET);
-
     res.send({
       status: 0,
       user: user,
@@ -58,11 +54,7 @@ const userLogin = async (req, res) => {
       assessToken: accesToken,
     });
   } catch (error) {
-    res.send({
-      status: 1,
-      msg: error,
-      data: null,
-    });
+    errorResponse(res, error);
   }
 };
 
