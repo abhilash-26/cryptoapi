@@ -25,7 +25,7 @@ const userRegister = async (req, res) => {
       password: hashPassword,
     });
     res.send({
-      user: createdUser,
+      user: createdUser.name,
       status: 0,
       msg: "User registered successfully",
     });
@@ -49,7 +49,7 @@ const userLogin = async (req, res) => {
     const accesToken = jwt.sign(userTo, process.env.ACCESS_TOCKEN_SECRET);
     res.send({
       status: 0,
-      user: user,
+      name: user.name,
       msg: "logged in",
       assessToken: accesToken,
     });
