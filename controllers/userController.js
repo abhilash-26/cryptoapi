@@ -30,7 +30,8 @@ const userRegister = async (req, res) => {
       msg: "User registered successfully",
     });
   } catch (error) {
-    errorResponse(res, error);
+    // errorResponse(res, error);
+    res.send(error);
   }
 };
 
@@ -54,7 +55,8 @@ const userLogin = async (req, res) => {
       assessToken: accesToken,
     });
   } catch (error) {
-    errorResponse(res, error);
+    // errorResponse(res, error);
+    res.send(error);
   }
 };
 

@@ -41,8 +41,8 @@ const getCurrencyPrice = async (req, res) => {
       params: {
         interval: "5min",
         function: "TIME_SERIES_INTRADAY",
+        // symbol: "MSFT",
         symbol: "MSFT",
-        // symbol: "BTC",
         datatype: "json",
         output_size: "compact",
       },
@@ -51,9 +51,20 @@ const getCurrencyPrice = async (req, res) => {
         "x-rapidapi-key": "d830d8ebdbmshfe5f70735a684ddp16b9b9jsn724f829a1b9b",
       },
     });
-    // console.log(result);
 
-    res.send(result.data);
+    if (!result) {
+      res.send({
+        msg: "No result found",
+        status: 1,
+        data: null,
+      });
+    } else {
+      res.send({
+        msg: "Data found is",
+        status: 0,
+        data: result.data,
+      });
+    }
   } catch (error) {
     res.send(error);
     // errorResponse(res, error);
